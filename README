@@ -1,48 +1,53 @@
-### README #######
-# transcription stream 11/2023 - https://transcription.stream ******
-This project creates a ssh and web accessible platform setup for trasnscribing and diarizing audio files. Files dropped via ssh into transcribe or
-diarize are treated to their respective process, with the output placed into a dated folder named after the audio file within transcribed. Likewise,
-uploading files via the ts-web web interface places files into the same folders, reading the results from the transcribed folder. 
 
-Expects an nvidia gpu.
+# README
 
-### Build and run #######
--Create the transcriptionstream volume
-   docker volume create -—name=transcriptionstream
+## Transcription Stream 11/2023
+[Transcription Stream](https://transcription.stream)
 
--Then create the ts-web and ts-gpu images from their folders respectively:
- #ts-web (very small very fast minimal build)
-   docker build -t ts-web:latest .
- #ts-gpu (this is going to take a while and end up around 13.8GB - while large, it contains the needed models to run offline)
-   docker build -t ts-gpu:latest .
+This project creates an SSH and web-accessible platform setup for transcribing and diarizing audio files. Files dropped via SSH into `transcribe` or `diarize` are treated to their respective process, with the output placed into a dated folder named after the audio file within `transcribed`. Likewise, uploading files via the `ts-web` web interface places files into the same folders, reading the results from the `transcribed` folder.
 
--Run the service by kicking off the docker-compose. The console will provide plenty of updates for running jobs, and lots of noisy
- info from ts-web.
-   docker-compose -p transcriptionstream up
+**Expects an NVIDIA GPU.**
 
-### Notes #######
-ports: 22222/ssh 5006/http
+## Build and Run
 
-Access the ssh server with on port 22222, placing the audio files you'd like to have transcribed into the transcribe
-folder, and diarized into the diarize folder. Completed files are placed into a dated, named, folder under transcribed. 
-   user: transcriptionstream
-   pass: nomoresaastax
+- Create the `transcriptionstream` volume:
+  ```
+  docker volume create --name=transcriptionstream
+  ```
 
-Access the web front end at http://dockerip:5006 Please understand I don't know flask, python, or javascript but was able to put this
-together with our friend chatgpt and many questions. It was a fun excercise that I still have future plans for. This version provides:
- - audio file upload/download
- - actionable task completion alerts (you can click on the alert and the transcription loads in the player)
- - html 5 web player with speed control and transcription highlighting
- - in transcription time scrubbing/scrolling synced to audio via the time slider
- - lots of things done incorrectly
+- Then create the `ts-web` and `ts-gpu` images from their folders respectively:
+  - **ts-web** (very small, very fast, minimal build):
+    ```
+    docker build -t ts-web:latest .
+    ```
+  - **ts-gpu** (this is going to take a while and end up around 13.8GB - while large, it contains the needed models to run offline):
+    ```
+    docker build -t ts-gpu:latest .
+    ```
 
-You shouldn't run this in production. This is functional example code. Did you see the part about ts-gpu taking a while to build?
-It's going to take a while, for me it's about 15 minutes, again, with the benefit of having the models available for offline use.
+- Run the service by kicking off the `docker-compose`. The console will provide plenty of updates for running jobs, and lots of noisy info from `ts-web`.
+  ```
+  docker-compose -p transcriptionstream up
+  ```
 
-You should change the password for transcriptionstream in the ts-gpu Dockerfile, and update the secret in ts-web app.py
+## Notes
 
-The transcription option was changed to whisperx from openai's whisper - mostly because it was already there for diarize.py and whisper was breaking
-the buidld - all that to say the raw text output for transcriptionsdoesn't display correctly in the console and probably ts-web, but the other generated
-files are good. The transcription option is also set to use the large-v2 model which is not downloaded during build. First transcription probably 
-delayed by that. RUN line can be added to the ts-gpu Dockerfile so it's included in the image build, or you can modify transcribe_example_d.sh to use 
-the medium model as solutions.
+**Ports**: 22222/SSH, 5006/HTTP
+
+Access the SSH server on port 22222, placing the audio files you'd like to have transcribed into the `transcribe` folder, and diarized into the `diarize` folder. Completed files are placed into a dated, named, folder under `transcribed`.
+
+- User: `transcriptionstream`
+- Pass: `nomoresaastax`
+
+Access the web front end at [http://dockerip:5006](http://dockerip:5006). Please understand I don't know Flask, Python, or JavaScript but was able to put this together with our friend ChatGPT and many questions. It was a fun exercise that I still have future plans for. This version provides:
+- Audio file upload/download
+- Actionable task completion alerts (you can click on the alert and the transcription loads in the player)
+- HTML 5 web player with speed control and transcription highlighting
+- In-transcription time scrubbing/scrolling synced to audio via the time slider
+- Lots of things done incorrectly
+
+**Warning**: You shouldn't run this in production. This is functional example code. The `ts-gpu` build takes a while, for me it's about 15 minutes, with the benefit of having the models available for offline use.
+
+You should change the password for `transcriptionstream` in the `ts-gpu` Dockerfile, and update the secret in `ts-web` app.py.
+
+The transcription option was changed to `whisperx` from OpenAI's Whisper - mostly because it was already there for `diarize.py` and Whisper was breaking the build. All that to say the raw text output for transcriptions doesn't display correctly in the console and probably `ts-web`, but the other generated files are good. The transcription option is also set to use the `large-v2` model which is not downloaded during build. First transcription probably delayed by that. A `RUN` line can be added to the `ts-gpu` Dockerfile so it's included in the image build, or you can modify `transcribe_example_d.sh` to use the medium model as solutions.
