@@ -1,6 +1,6 @@
 
 # Transcription Stream
-[https://transcription.stream](https://transcription.stream)  Special thanks to [MahmoudAshraf97](https://github.com/MahmoudAshraf97) and his work on [whisper-diarization](https://github.com/MahmoudAshraf97/whisper-diarization/)
+Created by [https://transcription.stream](https://transcription.stream) with special thanks to [MahmoudAshraf97](https://github.com/MahmoudAshraf97) and his work on [whisper-diarization](https://github.com/MahmoudAshraf97/whisper-diarization/)
 
 ## Overview
 This project creates an SSH and web-accessible platform for transcribing and diarizing audio files. Files dropped via SSH into `transcribe` or `diarize` are processed, with outputs placed in a dated folder named after the audio file within the `transcribed` directory. Uploading files via `ts-web` places files into the same folders, allowing for simple processing and retrieval.
