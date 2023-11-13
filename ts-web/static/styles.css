@@ -1,0 +1,219 @@
+body {
+    font-family: 'Courier New', monospace;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.container {
+    width: 50%;
+    margin: auto;
+    padding-top: 140px;
+    min-width: 800px;
+}
+
+.controls {
+    position: fixed;
+    top: 0;
+    background: #fff;
+    width: 100%;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 1000;
+    min-width: 800px;
+}
+
+.controls-inner {
+    width: 50%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.selection {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.selection label {
+    margin-right: 10px;
+}
+
+.selection #folderSelect {
+    margin-right: 20px;
+}
+
+.selection #fileSelect {
+    margin-right: 10px;
+}
+
+.audio-control {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.audio-control a.flat-button {
+    font-weight: normal;
+    margin-right: 10px;
+}
+
+.flat-button {
+    background-color: #f0f0f0;
+    color: #000;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    cursor: pointer;
+    border: 1px solid #000;
+    border-radius: 5px;
+    white-space: nowrap;
+}
+
+#transcription {
+    background: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    margin: 20px 0;
+    font-family: 'Courier New', monospace;
+    overflow-y: auto;
+}
+
+#transcription p {
+    margin: 0 0 10px 0;
+}
+
+.alert-indicator {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.alert-dot {
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+}
+
+#alertContainer {
+    position: fixed;
+    top: 30px;
+    left: 40px;
+    z-index: 3000;
+    background-color: #fff; /* Or the background color of your controls area */
+   /* border: 1px solid #ccc; /* Optional: Add a border */
+   /* border-radius: 5px; /* Optional: Round the corners */
+   /* box-shadow: 0px 4px 6px -1px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+    overflow-y: auto; /* To allow scrolling */
+    max-height: 100px; /* Or whatever height you prefer */
+    padding: 5px;
+    width: 20%;
+}
+
+#alertHeader {
+    font-size: 14px; /* Adjust as needed */
+    font-weight: bold;
+    margin-bottom: 5px; /* Adjust as needed */
+    text-align: center;
+}
+
+
+.alert-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    font-size: 10px;
+}
+
+.alert-bubble {
+	z-inde: 3001;
+    display: block;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+}
+
+button {
+    background-color: #f0f0f0;
+    color: #000;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 10px;
+    border: 1px solid #000;
+    border-radius: 5px;
+}
+
+.progress-container {
+    width: 100%;
+    height: 5px;
+    background: #e0e0e0;
+    cursor: pointer;
+    position: relative;
+}
+
+.progress {
+    height: 100%;
+    background: #76c7c0;
+    position: absolute;
+}
+
+input[type=range] {
+    width: 100px;
+    margin-left: 10px;
+}
+
+.time-display {
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+.time-slider-container {
+    margin-top: 10px;
+    width: 90%;
+    min-width; 800px;
+    display: block;
+    clear: both;
+}
+
+.time-slider {
+    width: 100%;
+    min-width; 800px;
+}
+
+.time-slider-container input[type="range"] {
+    width: 100%;
+    min-width: 600px;
+}
+body #alertContainer {
+    z-index: 3000;
+}
+#gearsIconContainer {
+    position: fixed;
+    top: 10px; /* Adjust as needed */
+    left: 10px; /* Adjust as needed */
+    z-index: 3000; /* To ensure it appears above other elements */
+}
+
+#gearsIcon {
+    width: 30px; /* Adjust as needed */
+    height: 30px; /* Adjust as needed */
+}
+
+.audio-time-control {
+    display: flex;
+    align-items: center;
+}

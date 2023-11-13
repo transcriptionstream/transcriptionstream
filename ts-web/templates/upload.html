@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload File</title>
+    <link rel="stylesheet" href="./static/styles.css">
+    <style>
+        .dropzone {
+            border: 2px dashed #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            cursor: pointer;
+            text-align: center;
+        }
+    </style>
+    <script>
+        {% if redirect %}
+            setTimeout(function() {
+                window.location.href = '/';
+            }, 3000); // Redirect to the main page after 3 seconds
+        {% endif %}
+        
+        function setupDropzone(formId, inputId) {
+            const form = document.getElementById(formId);
+            const input = document.getElementById(inputId);
+            
+            form.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                form.classList.add('hover');
+            });
+            
+            ['dragleave', 'dragend'].forEach(event => {
+                form.addEventListener(event, function() {
+                    form.classList.remove('hover');
+                });
+            });
+            
+            form.addEventListener('drop', function(e) {
+                e.preventDefault();
+                form.classList.remove('hover');
+                input.files = e.dataTransfer.files;
+            });
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            setupDropzone('transcribeForm', 'transcribeInput');
+            setupDropzone('diarizeForm', 'diarizeInput');
+        });
+    </script>
+</head>
+<body>
+    <div class="controls">
+        <div class="controls-inner">
+            <div class="selection">
+                <a href="/" class="flat-button">Back to Transcriptions</a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div id="transcription" style="text-align: center;">
+            <form id="transcribeForm" action="/upload_transcribe" method="POST" enctype="multipart/form-data" class="dropzone">
+                <label for="transcribeInput">Upload for Transcribe:</label>
+                <input type="file" name="file" id="transcribeInput" required accept="audio/*">
+                <button type="submit" class="flat-button">Upload</button>
+            </form>
+            <form id="diarizeForm" action="/upload_diarize" method="POST" enctype="multipart/form-data" class="dropzone">
+                <label for="diarizeInput">Upload for Diarize:</label>
+                <input type="file" name="file" id="diarizeInput" required accept="audio/*">
+                <button type="submit" class="flat-button">Upload</button>
+            </form>
+            {% if message %}
+                <p>{{ message }}</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

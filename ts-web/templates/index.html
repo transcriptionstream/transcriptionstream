@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Audio Transcription</title>
+    <link rel="stylesheet" href="./static/styles.css">
+    <style>
+        #alertContainer {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+        }
+        #transcriptionLink {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            z-index: 1001;
+            background-color: #f8f8f8;
+            padding: 8px;
+            border-radius: 5px;
+            text-decoration: none;
+            color: #000;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div id="gearsIconContainer">
+        <img src="./static/gears.svg" alt="Gears Icon" id="gearsIcon">
+    </div>
+    <a href="https://transcription.stream" id="transcriptionLink">transcription.stream</a>
+    {% include 'alerts.html' %}
+    {% include 'controls.html' %}
+    {% include 'transcription.html' %}
+    <script src="./static/audioControls.js" defer></script>
+    <script src="./static/transcription.js" defer></script>
+    <script src="./static/fileHandling.js" defer></script>
+    <script src="./static/alerts.js" defer></script>
+</body>
+</html>

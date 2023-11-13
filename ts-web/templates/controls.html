@@ -1,0 +1,43 @@
+<div class="controls">
+    <div class="controls-inner">
+        <div class="selection">
+            <label>Transcribed: </label>
+            <select id="folderSelect" onchange="loadFiles()">
+                <option value="" disabled selected>Select a folder</option>
+                {% for folder in folders %}
+                    <option value="{{ folder }}">{{ folder }}</option>
+                {% endfor %}
+            </select>
+            <label>Files: </label>
+            <select id="fileSelect">
+                <option value="" disabled selected>Select a file</option>
+            </select>
+            <button class="flat-button" onclick="downloadFile()">Download</button>
+        </div>
+        <div class="audio-control">
+        <div class="audio-time-control">
+            <span id="currentTime" class="time-display">0:00</span>/<span id="totalTime" class="time-display">0:00</span>
+            <button id="skipBackward" class="control-button">-15s</button>
+            <button id="playPauseBtn" class="control-button">▶</button>
+            <button id="skipForward" class="control-button">+15s</button>   
+        </div>
+        <audio id="audioPlayer"></audio>
+        <input type="range" id="volumeSlider" class="volume-slider" min="0" max="1" step="0.01" value="1">&nbsp;        
+            <label for="playbackSpeed">&nbsp;</label>
+            <select id="playbackSpeed">
+                <option value="0.5">0.5x</option>
+                <option value="0.75">0.75x</option>
+                <option value="1" selected>1x</option>
+                <option value="1.25">1.25x</option>
+                <option value="1.5">1.5x</option>
+                <option value="2">2x</option>
+            </select>
+             <button id="deleteFolderBtn" class="flat-button" onclick="deleteFolder()" style="margin-left: 20px;">Delete Transcription</button>
+             <a href="/upload" class="flat-button" style="margin-left: 20px;">Upload a new file</a>
+    </div>
+    <div class="time-slider-container">
+        <input type="range" id="timeSlider" class="time-slider" min="0" value="0" step="0.1">
+    </div>
+    
+        </div>
+</div>

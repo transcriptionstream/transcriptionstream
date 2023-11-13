@@ -1,0 +1,43 @@
+version: '3.8'
+# transcription stream startup
+#
+# make sure the volumes exist
+services:
+  init:
+    image: busybox
+    volumes:
+      - transcriptionstream:/transcriptionstream
+    command: /bin/sh -c "mkdir -p /transcriptionstream/incoming/transcribe /transcriptionstream/incoming/diarize /transcriptionstream/transcribed && chown -R transcriptionstream /transcriptionstream/incoming"
+
+
+# Start up the worker container
+  ts_transcription_service:
+    image: ts-gpu
+    container_name: ts-gpu
+    shm_size: 6gb
+    ports:
+      - "22222:22"
+    volumes:
+      - transcriptionstream:/transcriptionstream
+      - transcriptionstream:/home/transcriptionstream
+
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+# Start up the web front end
+  ts_web_service:
+    image: ts-web
+    container_name: ts-web
+    ports:
+      - "5006:5000"
+    volumes:
+      - transcriptionstream:/transcriptionstream
+
+volumes:
+  transcriptionstream:
+    external: true
