@@ -9,13 +9,13 @@ This project creates an SSH and web-accessible platform for transcribing and dia
 
 ## Build and Run Instructions
 
-### Creating Volumes
+### Creating Volume
 - **Transcription Stream Volume:**
   ```bash
   docker volume create --name=transcriptionstream
   ```
 
-### Building Images from their respective folders
+### Build Images from their respective folders
 - **ts-web Image:** (Minimal build, very small and fast)
   ```bash
   docker build -t ts-web:latest .
@@ -25,7 +25,7 @@ This project creates an SSH and web-accessible platform for transcribing and dia
   docker build -t ts-gpu:latest .
   ```
 
-### Running the Service
+### Run the Service
 - Start the service using `docker-compose`. This provides updates from running jobs and  noisy `ts-web` logs:
   ```bash
   docker-compose -p transcriptionstream up
