@@ -6,7 +6,7 @@ Created by [https://transcription.stream](https://transcription.stream) with spe
 This project creates a SSH and web-accessible platform for transcribing and diarizing audio files. Files dropped via SSH into `transcribe` or `diarize` are processed, with outputs placed in a dated folder named after the audio file within the `transcribed` directory. Uploading files via `ts-web` places files into the same folders, allowing for simple processing and retrieval.
 <div align="center">
 <h3>ssh upload and transcribed</h3>
-<img src="https://transcription.stream/ts-sshupload.png" width="33%" alt="upload file to be diarized to the diarize folder">  <img src="https://transcription.stream/ts-sshtranscribed" width="33%" alt="transcribed files in their folders">
+<img src="https://transcription.stream/ts-sshupload.png" width="33%" style="vertical-align: top;" alt="upload file to be diarized to the diarize folder">  <img src="https://transcription.stream/ts-sshtranscribed.png" width="33%" style="vertical-align: top;" alt="transcribed files in their folders">
 
 <h3>ts-web interface</h3>
 <img src="https://transcription.stream/ts-web.png" width="66%" alt="Example Image">
