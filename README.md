@@ -12,7 +12,9 @@ This project creates a SSH and web-accessible platform for transcribing and diar
 <img src="https://transcription.stream/ts-web.png" width="66%" alt="Example Image">
 
 <h3>ts-gpu diarization example </h3>
-[![Play video on youtube](https://transcription.stream/videothumb.png)](https://www.youtube.com/watch?v=UAgbcZjR4mM)
+<a href="https://www.youtube.com/watch?v=UAgbcZjR4mM">
+    <img src="https://transcription.stream/videothumb.png" alt="watch video on youtube" style="width: 66%;">
+  </a>
 </div>
 
 
