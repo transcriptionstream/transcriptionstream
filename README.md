@@ -10,7 +10,12 @@ This project creates a SSH and web-accessible platform for transcribing and diar
 
 <h3>ts-web interface</h3>
 <img src="https://transcription.stream/ts-web.png" width="66%" alt="Example Image">
+
+<h3>ts-gpu diarization example </h3>
+<iframe width="66%" src="https://www.youtube.com/embed/UAgbcZjR4mM" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 </div>
+
 
 **Prerequisite: NVIDIA GPU.**
 
