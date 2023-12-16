@@ -40,7 +40,7 @@ chmod +x install.sh;
   ```bash
   docker build -t ts-web:latest .
   ```
-- **ts-gpu Image:** (Approximately 13.8GB, includes necessary offline models)
+- **ts-gpu Image:** (23.7GB - includes necessary models and files to run offline)
   ```bash
   docker build -t ts-gpu:latest .
   ```
