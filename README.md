@@ -4,7 +4,7 @@ Created by [https://transcription.stream](https://transcription.stream) with spe
 
 ## Overview
 Create a self-hosted offline transcription and diarization service with Transcription Stream. A web app and SSH drop zones make this simple to use and impliment into your workflows.
-Use the web interface to upload, listen to, review, and download output files, or drop files via SSH into `transcribe` or `diarize`Files are processed with output placed into a named and dated folder.<div align="center">
+Use the web interface to upload, listen to, review, and download output files, or drop files via SSH into `transcribe` or `diarize`. Files are processed with output placed into a named and dated folder.<div align="center">
 <h3>ssh upload and transcribed</h3>
 <img src="https://transcription.stream/ts-sshupload.png" width="33%" style="vertical-align: top;" alt="upload file to be diarized to the diarize folder">  <img src="https://transcription.stream/ts-sshtranscribed.png" width="33%" style="vertical-align: top;" alt="transcribed files in their folders">
 
