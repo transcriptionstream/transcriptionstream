@@ -1,8 +1,9 @@
-
-# transcription stream ts-gpu image 
+# going to cuda image 12/23
+# transcription stream ts-gpu image
 #
 # Start from a smaller base image, such as Ubuntu slim or Alpine if possible
-FROM ubuntu:22.04
+FROM nvidia/cuda:12.0.1-cudnn8-runtime-ubuntu22.04
+
 
 # Set environment variables to reduce interaction during package installation
 ENV DEBIAN_FRONTEND=noninteractive
@@ -23,8 +24,9 @@ RUN apt-get update && apt-get install -y \
     tzdata \
  && rm -rf /var/lib/apt/lists/*
 
+# shouldn't need this with cuda image
 # Set the LD path
-RUN echo "/usr/local/lib/python3.10/dist-packages/nvidia/cudnn/lib" > /etc/ld.so.conf.d/nvidia.conf
+#RUN echo "/usr/local/lib/python3.10/dist-packages/nvidia/cudnn/lib" > /etc/ld.so.conf.d/nvidia.conf
 
 # Clone only the necessary branch or commit of whisper-diarization to reduce size
 RUN git clone --depth 1 https://github.com/MahmoudAshraf97/whisper-diarization.git
@@ -47,11 +49,13 @@ RUN useradd -m -p $(openssl passwd -1 nomoresaastax) transcriptionstream \
  && chown -R transcriptionstream:transcriptionstream /home/transcriptionstream/ \
  && sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/g' /etc/ssh/sshd_config
 
-# Run the necessary script
+# Run the necessary script so we have our transcription models IN the image. Adds to build time for download.
 RUN python3 diarize.py -a /home/transcriptionstream/test.wav
+RUN whisperx --model large-v3 --language en /home/transcriptionstream/test.wav --compute_type int8
 
 # Expose the SSH port
 EXPOSE 22
 
 # Start ssh and run the control script
 CMD service ssh start && while true; do bash /root/scripts/ts-control.sh; sleep 5; done
+
