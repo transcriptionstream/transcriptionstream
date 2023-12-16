@@ -3,14 +3,15 @@
 Created by [https://transcription.stream](https://transcription.stream) with special thanks to [MahmoudAshraf97](https://github.com/MahmoudAshraf97) and his work on [whisper-diarization](https://github.com/MahmoudAshraf97/whisper-diarization/)
 
 ## Overview
-Create a self-hosted offline transcription and diarization service with Transcription Stream. A web app and SSH drop zones make this simple to use and impliment into your workflows.
-Use the web interface to upload, listen to, review, and download output files, or drop files via SSH into `transcribe` or `diarize`. Files are processed with output placed into a named and dated folder.<div align="center">
+Create a turnkey self-hosted offline transcription and diarization service with Transcription Stream. A web app and SSH drop zones make this simple to use and impliment into your workflows.
+Use the web interface to upload, listen to, review, and download output files, or drop files via SSH into `transcribe` or `diarize`. Files are processed with output placed into a named and dated folder. Have a quick look at the <a href="https://www.youtube.com/watch?v=3RufeOjnlcE">install</a> and <a href="https://www.youtube.com/watch?v=pbZ8o7_MjG4">ts-web walkthrough</a> videoss for a better idea.<div align="center">
 <h3>ssh upload and transcribed</h3>
 <img src="https://transcription.stream/ts-sshupload.png" width="33%" style="vertical-align: top;" alt="upload file to be diarized to the diarize folder">  <img src="https://transcription.stream/ts-sshtranscribed.png" width="33%" style="vertical-align: top;" alt="transcribed files in their folders">
 
 <h3>ts-web interface</h3>
+<a href="https://www.youtube.com/watch?v=pbZ8o7_MjG4">
 <img src="https://transcription.stream/ts-web.png" width="66%" alt="Example Image">
-
+</a>
 <h3>ts-gpu diarization example </h3>
 <a href="https://www.youtube.com/watch?v=UAgbcZjR4mM">
     <img src="https://transcription.stream/videothumb.png" alt="watch video on youtube" style="width: 66%;">
