@@ -3,8 +3,8 @@
 Created by [https://transcription.stream](https://transcription.stream) with special thanks to [MahmoudAshraf97](https://github.com/MahmoudAshraf97) and his work on [whisper-diarization](https://github.com/MahmoudAshraf97/whisper-diarization/)
 
 ## Overview
-This project creates a SSH and web-accessible platform for transcribing and diarizing audio files. Files dropped via SSH into `transcribe` or `diarize` are processed, with outputs placed in a dated folder named after the audio file within the `transcribed` directory. Uploading files via `ts-web` places files into the same folders, allowing for simple processing and retrieval.
-<div align="center">
+Create a self-hosted offline transcription and diarization with Transcription Stream. A web app and SSH drop zones make this simple to use and impliment into your workflows.
+Use the web interface to upload, listen to, review, and download output files, or drop files via SSH into `transcribe` or `diarize`Files are processed with output placed into a named and dated folder.<div align="center">
 <h3>ssh upload and transcribed</h3>
 <img src="https://transcription.stream/ts-sshupload.png" width="33%" style="vertical-align: top;" alt="upload file to be diarized to the diarize folder">  <img src="https://transcription.stream/ts-sshtranscribed.png" width="33%" style="vertical-align: top;" alt="transcribed files in their folders">
 
@@ -18,10 +18,17 @@ This project creates a SSH and web-accessible platform for transcribing and diar
 </div>
 
 
-**Prerequisite: NVIDIA GPU.**
+**Prerequisite: NVIDIA GPU**
+> **Warning:** The resulting ts-gpu image is 23.7GB and might take a hot second to create
 
 ## Build and Run Instructions
+### Automated Setup and Run
+```bash
+chmod +x install.sh;
+./install.sh;
+```
 
+### Manual Setup
 ### Creating Volume
 - **Transcription Stream Volume:**
   ```bash
@@ -70,4 +77,4 @@ This project creates a SSH and web-accessible platform for transcribing and diar
 - Change the password for `transcriptionstream` in the `ts-gpu` Dockerfile.
 - Update the secret in `ts-web` app.py.
 - The transcription option uses `whisperx`, but was designed for `whisper`. Note that the raw text output for transcriptions might not display correctly in the console.
-- The `large-v2` model is not included in the initial build. You can add a `RUN` line in the `ts-gpu` Dockerfile for inclusion during build or adjust `transcribe_example_d.sh` to use the medium model
+- The `large-v3` model is included in the initial build.
