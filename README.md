@@ -8,6 +8,7 @@ Create a turnkey self-hosted offline transcription diarization service with Tran
 Use the web interface to upload, listen to, review, and download output files, or drop files via SSH into `transcribe` or `diarize`. Files are processed with output placed into a named and dated folder. Have a quick look at the <a href="https://www.youtube.com/watch?v=3RufeOjnlcE">install</a> and <a href="https://www.youtube.com/watch?v=pbZ8o7_MjG4">ts-web walkthrough</a> videos for a better idea.
 
 Now with Ollama and mistral built in for GPT operations on transcriptions! Summarizing out of the box, but simply change the prompt to fit your needs. If you're like me and don't have enough vram available (12GB 3060) to run ts-gpu and ts-gpt (Ollama) on the same host, simply update the Ollama api url in transcribe_example_d.sh to another Ollama api enpoint and it will utilize that. The feature is currently built to fail open, so if no api endpoint is available the step will just be skipped.
+<img src="https://transcription.stream/summary.png" alt="local ollama summary" style="width: 66%;">
 ```
 prompt_text = f"""
 Summarize the transcription below. Be sure to include pertinent information about the speakers, including name and anything else shared.
