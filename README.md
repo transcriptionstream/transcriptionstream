@@ -11,6 +11,7 @@ Now with Ollama and mistral built in for GPT operations on transcriptions! Summa
 <div align="center">
 <img src="https://transcription.stream/summary.png" alt="local ollama summary" style="width: 50%;">
 </div>
+
 ```
 prompt_text = f"""
 Summarize the transcription below. Be sure to include pertinent information about the speakers, including name and anything else shared.
