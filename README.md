@@ -9,6 +9,7 @@ Use the web interface to upload, listen to, review, and download output files, o
 
 Now with Ollama and mistral built in for GPT operations on transcriptions! Summarizing out of the box, but simply change the prompt to fit your needs. If you're like me and don't have enough vram available (12GB 3060) to run ts-gpu and ts-gpt (Ollama) on the same host, simply update the Ollama api url in transcribe_example_d.sh to another Ollama api enpoint and it will utilize that. The feature is currently built to fail open, so if no api endpoint is available the step will just be skipped.
 <div align="center">
+<h3>ollama summary</h3>
 <img src="https://transcription.stream/summary.png" alt="local ollama summary" style="width: 50%;">
 </div>
 
