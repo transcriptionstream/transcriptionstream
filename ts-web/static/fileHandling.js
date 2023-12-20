@@ -11,38 +11,71 @@ function loadFiles() {
         },
         body: formData.toString()
     })
-        .then(response => response.json())
-        .then(data => {
-            const audioPlayer = document.getElementById('audioPlayer');
-            const transcriptionDiv = document.getElementById('transcription');
-            const fileSelect = document.getElementById('fileSelect');
+    .then(response => response.json())
+    .then(data => {
+        // Load the summary
+        loadSummary(folder);
 
-            audioPlayer.src = `/get_file/${folder}/${data.audio_file}`;
-            audioPlayer.load();
+        // Handling audio file
+        const audioPlayer = document.getElementById('audioPlayer');
+        audioPlayer.src = `/get_file/${folder}/${data.audio_file}`;
+        audioPlayer.load();
 
-            fileSelect.innerHTML = '<option value="" disabled selected>Select a file</option>';
-            data.files.forEach(file => {
-                const option = document.createElement('option');
-                option.value = file;
-                
-                // Extract the file extension and set it as the text content
-                const parts = file.split('.');
-                const extension = parts.length > 1 ? parts[parts.length - 1] : file;
-                option.textContent = extension;
-                
-                fileSelect.appendChild(option);
-            });
-
-            const xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    parseSRT(xhr.responseText);
-                }
-            };
-            xhr.open('GET', `/get_file/${folder}/${data.srt_file}`, true);
-            xhr.send();
+        // Populate fileSelect
+        const fileSelect = document.getElementById('fileSelect');
+        fileSelect.innerHTML = '<option value="" disabled selected>Select a file</option>';
+        data.files.forEach(file => {
+            const option = document.createElement('option');
+            option.value = file;
+            
+            // Extract the file extension and set it as the text content
+            const parts = file.split('.');
+            const extension = parts.length > 1 ? parts[parts.length - 1] : file;
+            option.textContent = extension;
+            
+            fileSelect.appendChild(option);
         });
+
+        // Fetch and display the SRT transcription
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                parseSRT(xhr.responseText);
+            }
+        };
+        xhr.open('GET', `/get_file/${folder}/${data.srt_file}`, true);
+        xhr.send();
+    })
+    .catch(error => {
+        console.error('Error in loadFiles:', error);
+    });
+
     addEventListeners();
+}
+
+function loadSummary(folder) {
+    fetch(`/get_file/${folder}/summary.txt`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Summary file not found');
+            }
+            return response.text();
+        })
+        .then(text => {
+            document.getElementById('summary').innerHTML = text;
+        })
+        .catch(error => {
+            document.getElementById('summary').innerHTML = 'Summary not available';
+            console.error('Error loading summary:', error);
+        });
+}
+
+function downloadFile() {
+    // Existing downloadFile function code
+}
+
+function deleteFolder() {
+    // Existing deleteFolder function code
 }
 
 function downloadFile() {
@@ -50,6 +83,25 @@ function downloadFile() {
     const file = document.getElementById('fileSelect').value;
     if (!folder || !file) return;
     window.location.href = `/get_file/${folder}/${file}`;
+}
+
+function loadSummary(folder) {
+    fetch(`/get_file/${folder}/summary.txt`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Summary file not found');
+            }
+            return response.text();
+        })
+        .then(text => {
+            // Replace newline characters with HTML line breaks
+            const formattedText = text.replace(/\n/g, '<br>');
+            document.getElementById('summaryContent').innerHTML = formattedText;
+        })
+        .catch(error => {
+            document.getElementById('summaryContent').innerHTML = 'Summary not available';
+            console.error('Error loading summary:', error);
+        });
 }
 
 function deleteFolder() {

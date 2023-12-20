@@ -21,3 +21,20 @@ function hmsToSeconds(str) {
     }
     return s;
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    var coll = document.getElementById("summaryToggle");
+    var content = document.getElementById("summaryContent");
+
+    // Start with content displayed
+    content.style.display = "block"; 
+
+    coll.addEventListener("click", function() {
+        this.classList.toggle("active");
+        if (content.style.display === "block") {
+            content.style.display = "none";
+        } else {
+            content.style.display = "block";
+        }
+    });
+});

@@ -217,3 +217,42 @@ body #alertContainer {
     display: flex;
     align-items: center;
 }
+#summary {
+    background: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    margin: 20px 0;
+    font-family: 'Courier New', monospace;
+    overflow-y: auto;
+}
+
+#summary h2 {
+    margin-top: 0;
+    font-size: 18px; /* or whatever size you prefer */
+}
+.collapsible {
+    background-color: #fff; /* Changed to white */
+    color: black; /* Changed to black */
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: 1px solid #ddd; /* Add a border for better visibility */
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    border-radius: 5px;
+    margin-bottom: 1px; /* Space between button and content */
+}
+
+.active, .collapsible:hover {
+    background-color: #fff; /* Light grey to indicate active/hover state */
+}
+
+.content {
+    padding: 20px;
+    /* Removed display: none; so it starts as displayed */
+    overflow: hidden;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    font-family: 'Courier New', monospace;
+}
