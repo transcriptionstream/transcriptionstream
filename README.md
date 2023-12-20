@@ -108,4 +108,7 @@ chmod +x install.sh;
 - Change the password for `transcriptionstream` in the `ts-gpu` Dockerfile.
 - Update the secret in `ts-web` app.py.
 - The transcription option uses `whisperx`, but was designed for `whisper`. Note that the raw text output for transcriptions might not display correctly in the console.
-- The `large-v3` model is included in the initial build.
+- Both the `large-v3` and `large-v2` models are included in the initial build.
+- Update the Ollama api url in ts-gpu/transcribe_example_d.sh prior to install/build
+- Change the prompt text in ts-gpu/ts-summarize.py to fit your needs. Update ts-web/templates/transcription.html if you want to call it something other than summary.
+- 12GB of vram is not enough to run both whisper-diarization and ollama mistral. Whisper-diarization is fairly light on gpu memory out of the box, but Ollama's runner holds over 10GB of gpu memory open after generating for quite sometime, causing the next diarization/transcription to run our of CUDA memory. Since I can't run both on the same host, I've set the batch size for both whisper-diarization and whisperx to 16, from their default 8.
