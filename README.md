@@ -88,6 +88,7 @@ chmod +x install.sh;
 ### Ports
 - **SSH:** 22222
 - **HTTP:** 5006
+- **Ollam:** 11434
 
 ### SSH Server Access
 - **Port:** 22222
@@ -103,13 +104,20 @@ chmod +x install.sh;
   - HTML5 web player with speed control and transcription highlighting
   - Time-synced transcription scrubbing/highlighting/scrolling
 
+### Ollama api
+- **URL:** [http://dockerip:11434](http://dockerip:11434)
+- change the prompt used, in `/ts-gpu/ts-summarize.py`
+
 > **Warning:** This is example code for example purposes and should not be used in production environments.
 
 ### Customization and Troubleshooting
 - Change the password for `transcriptionstream` in the `ts-gpu` Dockerfile.
-- Update the secret in `ts-web` app.py.
+- Uncomment ts-gpt section in `docker-compose.yml` to enable built-in Ollama mistral. Update `install.sh` and `run.sh` for mistral model install and updates.
+- Update the Ollama api endpoint url in /ts-gpu/transcribe_example_d.sh if not running ts-gpt
+- Update the secret in `/ts-web/app.py`
 - The transcription option uses `whisperx`, but was designed for `whisper`. Note that the raw text output for transcriptions might not display correctly in the console.
 - Both the `large-v3` and `large-v2` models are included in the initial build.
 - Update the Ollama api url in ts-gpu/transcribe_example_d.sh prior to install/build
 - Change the prompt text in ts-gpu/ts-summarize.py to fit your needs. Update ts-web/templates/transcription.html if you want to call it something other than summary.
 - 12GB of vram is not enough to run both whisper-diarization and ollama mistral. Whisper-diarization is fairly light on gpu memory out of the box, but Ollama's runner holds over 10GB of gpu memory open after generating for quite sometime, causing the next diarization/transcription to run our of CUDA memory. Since I can't run both on the same host, I've set the batch size for both whisper-diarization and whisperx to 16, from their default 8.
+- I need to fix an issue with ts-web that throws an error to console when loading a transcription when a summary.txt file does not also exist.
