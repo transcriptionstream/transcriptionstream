@@ -3,14 +3,14 @@
 Created by [https://transcription.stream](https://transcription.stream) with special thanks to [MahmoudAshraf97](https://github.com/MahmoudAshraf97) and his work on [whisper-diarization](https://github.com/MahmoudAshraf97/whisper-diarization/), and to [jmorganca](https://github.com/jmorganca/ollama) for Ollama and its amazing simplicity in use.
 
 ## Overview
-Create a turnkey self-hosted offline transcription diarization service with Transcription Stream. A web app and SSH drop zones make this simple to use and impliment into your workflows. Ollama allows for a powerful toolset, limited only by your prompt skills, to perform complex operations on your transcriptions.
+Create a turnkey self-hosted offline transcription diarization service with Transcription Stream. A web app and SSH drop zones make this simple to use and implement into your workflows. Ollama allows for a powerful toolset, limited only by your prompt skills, to perform complex operations on your transcriptions.
 
 Use the web interface to upload, listen to, review, and download output files, or drop files via SSH into `transcribe` or `diarize`. Files are processed with output placed into a named and dated folder. Have a quick look at the <a href="https://www.youtube.com/watch?v=3RufeOjnlcE">install</a> and <a href="https://www.youtube.com/watch?v=pbZ8o7_MjG4">ts-web walkthrough</a> videos for a better idea.
 
 Now with Ollama and mistral built in for GPT operations on transcriptions! Summarizing out of the box, but simply change the prompt to fit your needs. If you're like me and don't have enough vram available (12GB 3060) to run ts-gpu and ts-gpt (Ollama) on the same host, simply update the Ollama api url in transcribe_example_d.sh to another Ollama api enpoint and it will utilize that. The feature is currently built to fail open, so if no api endpoint is available the step will just be skipped.
 <div align="center">
-<h3>ollama summary</h3>
-<img src="https://transcription.stream/summary.png" alt="local ollama summary" style="width: 50%;">
+<h3>mistral summary</h3>
+<img src="https://transcription.stream/summary.png" alt="local ollama mistral summary" style="width: 50%;">
 </div>
 
 ```
