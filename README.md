@@ -107,6 +107,6 @@ chmod +x run.sh;
 - Change the prompt text in ts-gpu/ts-summarize.py to fit your needs. Update ts-web/templates/transcription.html if you want to call it something other than summary.
 - 12GB of vram is not enough to run both whisper-diarization and ollama mistral. Whisper-diarization is fairly light on gpu memory out of the box, but Ollama's runner holds enough gpu memory open causing the diarization/transcription to run our of CUDA memory on occasion. Since I can't run both on the same host reliably, I've set the batch size for both whisper-diarization and whisperx to 16, from their default 8, and let a m series mac run the Ollama endpoint.
 - Have more questions? Have a chat with our <a href="https://chat.openai.com/g/g-pktPPxVs5-transcription-stream-gptTr">Tanscription Stream GPT</a> 
-### Todo
+### To-do
 - Need to fix an issue with ts-web that throws an error to console when loading a transcription when a summary.txt file does not also exist. Lots of other annoyances with ts-web, but it's functional.
 - Need to add a search/control interface to ts-web for Meilisearch
