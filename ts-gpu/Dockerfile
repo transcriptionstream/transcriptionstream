@@ -31,11 +31,16 @@ RUN git clone --depth 1 https://github.com/MahmoudAshraf97/whisper-diarization.g
 WORKDIR /whisper-diarization
 RUN pip install -r requirements.txt
 
+# Install req for calls to ts-meilisearch
+RUN pip install meilisearch
+
 # Copy the required files
 COPY ts-control.sh /root/scripts/
 COPY transcribe_example_d.sh /root/scripts/transcribe_example.sh
 COPY test.wav /home/transcriptionstream/
 COPY ts-summarize.py /root/scripts/
+COPY index-single.py /root/scripts/
+COPY auto-summary.py /root/scripts/
 
 # Create a new user and setup the environment
 RUN useradd -m -p $(openssl passwd -1 nomoresaastax) transcriptionstream \
@@ -46,13 +51,13 @@ RUN useradd -m -p $(openssl passwd -1 nomoresaastax) transcriptionstream \
  && chown -R transcriptionstream:transcriptionstream /home/transcriptionstream/ \
  && sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/g' /etc/ssh/sshd_config
 
-# Run the necessary script so we have our transcription models IN the image. Adds to build time for download.
+# Run the necessary scripts so we have our transcription models IN the image. Adds to build time for download.
 RUN python3 diarize.py -a /home/transcriptionstream/test.wav
 RUN whisperx --model large-v3 --language en /home/transcriptionstream/test.wav --compute_type int8
+#RUN python3 -m pytorch_lightning.utilities.upgrade_checkpoint ../root/.cache/torch/whisperx-vad-segmentation.bin
 
 # Expose the SSH port
 EXPOSE 22
 
 # Start ssh and run the control script
 CMD service ssh start && while true; do bash /root/scripts/ts-control.sh; sleep 5; done
-

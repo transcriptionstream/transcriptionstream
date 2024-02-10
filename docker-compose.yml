@@ -7,12 +7,18 @@ services:
     image: busybox
     volumes:
       - transcriptionstream:/transcriptionstream
-    command: /bin/sh -c "mkdir -p /transcriptionstream/incoming/transcribe /transcriptionstream/incoming/diarize /transcriptionstream/transcribed && chown -R transcriptionstream /transcriptionstream/incoming"
+    command: /bin/sh -c "mkdir -p /transcriptionstream/incoming/transcribe /transcriptionstream/incoming/diarize /transcriptionstream/transcribed /transcriptionstream/scripts && chown -R transcriptionstream:transcriptionstream /transcriptionstream/incoming"
 
 
 # Start up the worker container
   ts_transcription_service:
-    image: ts-gpu
+    image: ts-gpu:latest
+    environment:
+      - DIARIZATION_MODEL=${DIARIZATION_MODEL}
+      - TRANSCRIPTION_MODEL=${TRANSCRIPTION_MODEL}
+      - MAX_CONCURRENT_TRANSFORMS=${MAX_CONCURRENT_TRANSFORMS}
+      - MAX_CONCURRENT_SUMMARYS=${MAX_CONCURRENT_SUMMARYS}
+      - OLLAMA_ENDPOINT_IP=${OLLAMA_ENDPOINT_IP}
     container_name: ts-gpu
     shm_size: 6gb
     ports:
@@ -20,9 +26,11 @@ services:
     volumes:
       - transcriptionstream:/transcriptionstream
       - transcriptionstream:/home/transcriptionstream
+#      - transcriptionstream-scripts:/root/scripts
+
     networks:
       ts_private_network:
-        ipv4_address: 172.28.1.5
+        ipv4_address: 172.30.1.5
 
     deploy:
       resources:
@@ -35,6 +43,8 @@ services:
 # Start up the web front end
   ts_web_service:
     image: ts-web
+    environment:
+      - TS_WEB_SECRET_KEY=${TS_WEB_SECRET_KEY}
     container_name: ts-web
     ports:
       - "5006:5000"
@@ -42,38 +52,59 @@ services:
       - transcriptionstream:/transcriptionstream
     networks:
       ts_private_network:
-        ipv4_address: 172.28.1.2
+        ipv4_address: 172.30.1.2
+
+# Start up MeiliSearch
+  ts_meilisearch_service:
+    image: getmeili/meilisearch
+    environment:
+      - MEILI_MASTER_KEY=your_api_key
+      - MEILI_HTTP_CORS_ORIGINS=http://172.30.1.11:5000
+    container_name: ts-meilisearch
+    ports:
+      - "7700:7700"
+    volumes:
+      - transcriptionstream:/transcriptionstream
+      - transcriptionstream:/meili_data
+    networks:
+      ts_private_network:
+        ipv4_address: 172.30.1.12
+
+
 
 # if you want to run ollama locally and have enough vram uncomment this section
 #  # Startup ts-gpt
-#  ts_gpt_service:
-#    image: ollama/ollama
-#    container_name: ts-gpt
-#    ports:
-#      - "11434:11434"
-#    volumes:
-#      - transcriptionstream:/root/.ollama
-#    networks:
-#      ts_private_network:
-#        ipv4_address: 172.28.1.3
-#
-#    deploy:
-#      resources:
-#        reservations:
-#          devices:
-#            - driver: nvidia
-#              count: 1
-#              capabilities: [gpu]
+  ts_gpt_service:
+    image: ollama/ollama
+    container_name: ts-gpt
+    ports:
+      - "11434:11434"
+    volumes:
+      - transcriptionstream:/root/.ollama
+    networks:
+      ts_private_network:
+        ipv4_address: 172.30.1.3
+
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
 
 
 networks:
   ts_private_network:
     ipam:
       config:
-        - subnet: 172.28.0.0/16
+        - subnet: 172.30.0.0/16
 
 
 
 volumes:
   transcriptionstream:
     external: true
+#  transcriptionstream-scripts:
+#    external: true
+

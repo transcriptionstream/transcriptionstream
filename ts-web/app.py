@@ -5,7 +5,8 @@ import shutil
 from datetime import datetime
 
 app = Flask(__name__)
-app.secret_key = 'some_secret_key'  # Change this to a random secret key
+# Use the TS_WEB_SECRET_KEY environment variable as the secret key, and the fallback
+app.secret_key = os.environ.get('TS_WEB_SECRET_KEY', 'some_secret_key')
 
 TRANSCRIBED_FOLDER = '/transcriptionstream/transcribed'
 UPLOAD_FOLDER = '/transcriptionstream/incoming'
