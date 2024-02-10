@@ -60,6 +60,7 @@ services:
     environment:
       - MEILI_MASTER_KEY=your_api_key
       - MEILI_HTTP_CORS_ORIGINS=http://172.30.1.11:5000
+      - MEILI_NO_ANALYTICS=true 
     container_name: ts-meilisearch
     ports:
       - "7700:7700"
