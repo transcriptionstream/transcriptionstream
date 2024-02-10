@@ -1,6 +1,6 @@
 
 # Transcription Stream
-Created by [https://transcription.stream](https://transcription.stream) with special thanks to [MahmoudAshraf97](https://github.com/MahmoudAshraf97) and his work on [whisper-diarization](https://github.com/MahmoudAshraf97/whisper-diarization/), and to [jmorganca](https://github.com/jmorganca/ollama) for Ollama and its amazing simplicity in use.
+Created by [https://transcription.stream](https://transcription.stream) with special thanks to [MahmoudAshraf97](https://github.com/MahmoudAshraf97) and his work on [whisper-diarization](https://github.com/MahmoudAshraf97/whisper-diarization/), and to [jmorganca](https://github.com/jmorganca/ollama) for [Ollama](https://ollama.com/) and its amazing simplicity in use.
 
 ## Overview
 Transcription Stream is a turnkey self-hosted diarization service that works completely offline. Out of the box it includes:
