@@ -71,14 +71,6 @@ function loadSummary(folder) {
 }
 
 function downloadFile() {
-    // Existing downloadFile function code
-}
-
-function deleteFolder() {
-    // Existing deleteFolder function code
-}
-
-function downloadFile() {
     const folder = document.getElementById('folderSelect').value;
     const file = document.getElementById('fileSelect').value;
     if (!folder || !file) return;
