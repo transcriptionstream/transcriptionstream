@@ -19,6 +19,7 @@ services:
       - MAX_CONCURRENT_TRANSFORMS=${MAX_CONCURRENT_TRANSFORMS}
       - MAX_CONCURRENT_SUMMARYS=${MAX_CONCURRENT_SUMMARYS}
       - OLLAMA_ENDPOINT_IP=${OLLAMA_ENDPOINT_IP}
+      - MEILI_MASTER_KEY=${MEILI_MASTER_KEY}
     container_name: ts-gpu
     shm_size: 6gb
     ports:
@@ -58,7 +59,7 @@ services:
   ts_meilisearch_service:
     image: getmeili/meilisearch
     environment:
-      - MEILI_MASTER_KEY=your_api_key
+      - MEILI_MASTER_KEY=${MEILI_MASTER_KEY}
       - MEILI_HTTP_CORS_ORIGINS=http://172.30.1.11:5000
       - MEILI_NO_ANALYTICS=true 
     container_name: ts-meilisearch
