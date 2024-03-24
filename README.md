@@ -53,7 +53,7 @@ The transcription is as follows
 ```
 
 **Prerequisite: NVIDIA GPU**
-> **Warning:** The resulting ts-gpu image is 23.7GB and might take a hot second to create
+> **Warning:** The resulting ts-gpu image is ~26GB and might take a hot second to create
 
 ## Build and Run Instructions
 ### Automated Setup and Run
