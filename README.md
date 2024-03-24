@@ -56,7 +56,7 @@ The transcription is as follows
 > **Warning:** The resulting ts-gpu image is ~26GB and might take a hot second to create
 
 ## Build and Run Instructions
-### Automated Setup and Run
+### Automated Install and Run
 ```bash
 chmod +x install.sh;
 ./install.sh;
