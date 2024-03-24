@@ -24,6 +24,10 @@ RUN apt-get update && apt-get install -y \
     tzdata \
  && rm -rf /var/lib/apt/lists/*
 
+# added to fix sox/numpy error while installing whisper-diarization 03/24/2024
+RUN pip install typing_extensions
+RUN pip install numpy
+
 # Clone only the necessary branch or commit of whisper-diarization to reduce size
 RUN git clone --depth 1 https://github.com/MahmoudAshraf97/whisper-diarization.git
 
