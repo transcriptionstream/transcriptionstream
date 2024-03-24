@@ -4,8 +4,11 @@ from meilisearch import Client
 import sys
 import re
 
+# Get the MEILI_MASTER_KEY from the environment variable
+meili_master_key = os.getenv('MEILI_MASTER_KEY')
+
 # MeiliSearch setup
-meili_client = Client('http://172.30.1.12:7700', 'your_api_key')
+meili_client = Client('http://172.30.1.12:7700', meili_master_key)
 index = meili_client.index('transcriptions')
 
 def is_meilisearch_responsive(url):
