@@ -62,6 +62,7 @@ The transcription is as follows
 ```
 
 ## Build and Run Instructions
+> If you'd like to build the images locally
 ### Automated Install and Run
 ```bash
 chmod +x install.sh;
