@@ -49,7 +49,7 @@ The transcription is as follows
 """
 # JSON payload
 payload = {
-    "model": "mistral",
+    "model": "transcriptionstream/transcriptionstream",
     "prompt": prompt_text,
     "stream": False,
     "keep_alive": "5s"
