@@ -12,6 +12,10 @@ read answer
 # Check if the user input is 'y' or 'Y'
 if [ "$answer" != "${answer#[Yy]}" ] ;then
 
+    # Create necessary Docker volume
+    echo "Creating Docker volume..."
+    docker volume create --name=transcriptionstream
+
     # Start the docker-compose services
     echo "Starting services with docker-compose..."
     docker-compose -f docker-compose-nobuild.yml up --detach
@@ -19,7 +23,7 @@ if [ "$answer" != "${answer#[Yy]}" ] ;then
 # If running ts-gpt ollama container, enable this
 #    # Get the model installed on ts-gpt (requires curl)
     echo "Downloading  mistral model"
-    curl -X POST http://localhost:11434/api/pull -d '{"name": "mistral"}'
+    curl -X POST http://localhost:11434/api/pull -d '{"name": "transcriptionstream/transcriptionstream"}'
 
     # Re-attach to compose logs
     echo "Re-attaching to console logs"
