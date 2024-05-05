@@ -109,8 +109,8 @@ chmod +x run.sh;
 ### Customization and Troubleshooting
 - Update variables in the .env file
 - Change the password for `transcriptionstream` in the `ts-gpu` Dockerfile.
-- Update the Ollama api endpoint IP in .dev if you want to use a different endpoint
-- Update the secret in .dev for ts-web
+- Update the Ollama api endpoint IP in .env if you want to use a different endpoint
+- Update the secret in .env for ts-web
 - Use .env to choose which models are included in the initial build.
 - Change the prompt text in ts-gpu/ts-summarize.py to fit your needs. Update ts-web/templates/transcription.html if you want to call it something other than summary.
 - 12GB of vram may not be enough to run both whisper-diarization and ollama mistral. Whisper-diarization is fairly light on gpu memory out of the box, but Ollama's runner holds enough gpu memory open causing the diarization/transcription to run our of CUDA memory on occasion. Since I can't run both on the same host reliably, I've set the batch size for both whisper-diarization and whisperx to 16, from their default 8, and let a m series mac run the Ollama endpoint. 
