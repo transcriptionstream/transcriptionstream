@@ -33,6 +33,7 @@ RUN git clone --depth 1 https://github.com/transcriptionstream/whisper-diarizati
 
 # Install whisper-diarization requirements
 WORKDIR /whisper-diarization
+RUN pip install huggingface-hub==0.23.2
 RUN pip install -r requirements.txt
 
 # Install req for calls to ts-meilisearch
